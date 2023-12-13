@@ -9,7 +9,7 @@ public class Main
 	}
 	public static int sqrt(int n){
 	    for(int i=1;i<=n;i++){
-	        while(i*i==n){
+	        if(i*i==n){
 	            return i;
 	        }
 	        
