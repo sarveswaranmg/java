@@ -1,0 +1,44 @@
+public class Main
+{
+	public static void main(String[] args) {
+		int arr[] = {2, 6, 1, 6, 9}; //Creating array with elements
+		System.out.println(closeMinMax(arr)); //Calling the function and printing the output
+	}
+	public static int closeMinMax(int[] arr){
+	    //finding min and max
+	    int n = arr.length;
+	    int max = arr[0],min=arr[0]; //first we are assigning max and min as first element of array
+        for(int i=0;i<n;i++){
+            if(max>arr[i]){
+                max = arr[i];
+            }
+            else if(arr[i]<min){
+                min = arr[i];
+            }
+        }
+        //finding min distance between max and min 
+        int c_max = -1, c_min = -1; //initiale positions for max and min
+        int ans = n; //initiale max distance it can be that is arraysize
+        if(max == min){  //if both min and max are same that is at same positons so distance will be 1.
+            ans = 1;
+        }
+        else
+        {
+        for(int i = n-1;i>=0;i--){ //checking from last 
+            if(arr[i]==max){
+                c_max = i;   //if max value is found update update max position
+                if(c_min != -1){ 
+                    ans = Math.min(ans,c_min - i + 1);  //min distace if min position is found
+                }
+            }
+            else if(arr[i]==min){
+                c_min = i; //if min value is found update update min position
+                if(c_max != -1){
+                    ans = Math.min(ans,c_max - i + 1); //min distace if max position is found
+                }
+            }
+        }
+        }
+        return ans;
+	}
+}
