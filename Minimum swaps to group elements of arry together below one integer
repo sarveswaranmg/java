@@ -1,0 +1,35 @@
+public class Main
+{
+	public static void main(String[] args) {
+	    int a[] = {1, 12, 10, 3, 14, 10, 5};
+	    int b = 8;
+	    int n = a.length;
+	    int cnt = 0;
+	    for(int i =0;i<n;i++){
+	        if(a[i]<b){
+	            cnt++;
+	        }
+	    }
+	    int bcnt = 0;
+	    for(int i=0;i<cnt;i++){
+	        if(a[i]>b){
+	            bcnt++;
+	        }
+	    }
+	    int s = 1,e = cnt ,min = bcnt;
+	    while(e<n){
+	        if(a[e]>b){
+	            bcnt++;
+	        }
+	        if(a[s - 1]>b){
+	            bcnt--;
+	        }
+	        if(bcnt<min){
+	            min = bcnt;
+	        }
+	        e++;
+	        s++;
+	    }
+		System.out.println(min);
+	}
+}
