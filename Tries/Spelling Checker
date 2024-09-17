@@ -1,1 +1,61 @@
+import java.util.*;
+
+public class Main
+{
+    static class TrieNode{
+        Character data;
+        TrieNode[] children;
+        boolean eow;
+        TrieNode(Character ch){
+            data = ch;
+            children = new TrieNode[26];
+            eow = false;
+        }
+    }
+    public static void insert(TrieNode root,String word){
+        TrieNode current = root;
+        for(int i =0;i<word.length();i++){
+            Character ch = word.charAt(i);
+            
+            if(current.children[ch -'a']==null){
+                
+                TrieNode node = new TrieNode(ch);
+                current.children[ch -'a'] = node;
+            }
+            
+            current = current.children[ch -'a'];
+        }
+        current.eow = true;
+    }
+    public static boolean search(TrieNode root,String word){
+        TrieNode current = root;
+        for(int i =0;i<word.length();i++){
+            Character ch = word.charAt(i);
+            
+            if(current.children[ch-'a']==null){
+                return false;
+            }
+            current = current.children[ch -'a'];
+        }
+        return true;
+    }
+    public static int[] solve(String[] A,String[] B){
+        TrieNode root = new TrieNode('0');
+        int[] res = new int[B.length];
+        for(int i =0;i<A.length;i++){
+            insert(root,A[i]);
+        }
+        for(int i=0;i<B.length;i++){
+            res[i]=search(root,B[i])?1:0;
+        }
+        return res;
+    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String[] A = {"hat", "cat", "rat"};
+		String[] B = {"cat", "ball"};
+		
+		System.out.println(Arrays.toString(solve(A,B)));
+	}
+}
 
